@@ -1,5 +1,5 @@
 body{
-    margin: 0 15%;
+    margin: 0 10%;
     background: linear-gradient(-180deg, white, white, rgb(169, 229, 231));
     padding-top: 1%;
 }
@@ -8,12 +8,12 @@ body{
 
 .title {
     display: block;
-    text-align: center;
     font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-size: 270%;
+    font-size: 2.5rem;
     text-decoration: none;
-    margin-left: 200px;
     color: black;
+    margin-left: 32rem;
+    width: 27%;
 }
 
 #Date{
@@ -21,14 +21,12 @@ body{
 }
 
 .Login {
-    margin-top: -12px;
     float: right;
     text-decoration: none;
     color: rgb(255, 255, 255);
     font-family:Georgia, 'Times New Roman', Times, serif;
     padding: 5px;
     margin-left: auto;
-    border-radius: 5%;
     background-color: rgb(22, 52, 141);
     margin-right: 10px;
 }
@@ -63,76 +61,129 @@ hr {
 /*FINE NAVBAR*/
 /*-------------------------------------------------*/
 
-#UnitedStates{
-    margin-left: auto;
-    font-size: large;
+/*MAIN*/
+/*FIRST FLEXBOX WITH 4 ARTICLES*/
+#Container-1{
+    display: flex;
+    justify-content: space-between;
+    height: 38em;
+    margin-top: 10px;
 }
-
-/*INIZIO ASIDE*/
-aside {
-    margin-top: auto;
-    width: 20%;
-    float: left;
-    padding: 10px;
+.Div-1{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    width: 30%;
+    margin-top: -20px;
 }
-
-aside p {
+.Div-1 h2, #P-1{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    width: 180%;
+    margin-top: 30px;
+}
+.Div-1 img {
+    margin-left: 420px;
+    margin-top: -290px;
+}
+.Div-2{
     font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-size: 110%;
-}
-
-/*FINE ASIDE*/
-
-/*INIZIO SECTION*/
-section {
-    margin-top: auto;
     width: 40%;
-    float: left;
-    padding: 10px;
+    margin-top: -20px;
 }
-
-section p {
-    font-size: 110%;
+.Div-2 hr {
+    width: 0;
+    height: 605px;
+    margin-left: -12px;
+    margin-top: -590px;
+}
+.IMG-1 hr {
+    width: 233%;
+    margin-left: -438px;
+}
+#hr-2{
+    width: 195%;
+}
+.Div-1-h2-p {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    width: 190%;
+    margin-top: -20px;
+}
+/*END FIRST FLEXBOX WITH 4 ARTICLES*/
+
+/*SECOND CONTAINER WITH 2 ARTICLES*/
+#Container-2{
+    display: flex;
+    height: 32em;
+    margin-top: 25px;
+}
+#Container-2 h2{
+    font-size: 20px;
+    margin-top: -20px;
+}
+.Div-3{
+    text-align: center;
+    margin-left: -60px;
+}
+.Div-4 {
+    margin-top: -35px;
+    text-align: center;
+}
+#hr-3 {
+    width: 0;
+    height: 500px;
+    margin-left: 597px;
+    margin-top: -500px;
 }
 
-#section2 p {
-    font-size: large;
+/*THIRD CONTAINER*/
+#Container-3{
+    justify-content: center;
+    display: flex;
+    height: 30em;
+    margin-top: 10px;
+}
+.Div-5 h3{
+    margin-left: 3rem;
+    width: 80%;
+}
+.Div-5 p {
+    margin-top: -10px;
+    margin-left: 3rem;
+    width: 80%;
+}
+.Div-6 h3 {
+    margin-left: 2rem;
+    width: 90%;
+}
+.Div-5 hr {
+    width: 80%;
+    margin-left: 50px;
+}
+.Div-6 hr {
+    width: 80%;
+    margin-left: 30px;
+}
+#hr-6{
+    width: 0;
+    height: 29rem;
+    margin-left: 1rem;
+    margin-top: -18rem;
 }
 
-#section3{
-    margin-top: auto;
-    width: 60%;
-    font-size: large;
-}
 
-#Tech{
-    margin-top: auto;
-    margin-left: auto;
-    font-size: large;
-}
-/*FINE SECTION*/
 
-/*INIZIO ARTICLE*/
-article {
-    width: 40%;
-    float: left;
-    padding: 10px;
-}
 
-article p {
-    font-size: 110%;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-}
 
-/*FINE ARTICLE*/
+
+
+
+
+/*FINE MAIN*/
+
 
 /*INIZIO FOOTER*/
 
 footer {
     margin-top: 10px;
     background: linear-gradient(30deg, rgba(206, 209, 182, 0.733), rgb(200, 190, 190), rgb(213, 206, 206));
-    display:block;
     clear: both;
     padding: 10px;
 }
@@ -145,7 +196,7 @@ footer {
 .footer1 li {
     display: inline;
     font-family: 'Cambria, Cochin, Georgia, Times, Times New Roman', serif;
-    margin: 100px;
+    margin: 8%;
     text-decoration: none;
 }
 
@@ -180,3 +231,9 @@ footer {
 }
 
 /*FINE FOOTER*/
+
+@media (min-width: 1920px) and (max-width: 1920px) {
+    .title {
+        margin-left: 33.5rem;
+    }
+}
