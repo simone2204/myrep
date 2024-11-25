@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="MainPageStyle.css">
+    <link rel="icon" type="image/png" href="favicon.png">
     <title>World Street Journal</title>
 </head>
 
@@ -34,84 +35,100 @@
     <hr>
 
     </nav>
+
 <!--MAIN-->
 <main>
-    <div id="UnitedStates"><Strong>United States & World News</Strong></div>
-   <!--ASIDE-->
-    <aside>
-        <h2>More Republicans Appear to Be Voting Early, Despite Trump’s Mixed Messages
-        </h2>
-        <p>In 2020, Donald Trump convinced supporters that anything but in-person Election Day voting was untrustworthy.
-             After his loss, Republicans shifted their stance.
-        </p><hr>
-        <h3>As Election Nears, Kelly Warns Trump Would Rule Like a Dictator
-        </h3>
-        <p>John Kelly, the Trump White House’s longest-serving chief of staff, 
-            said that he believed that Donald Trump met the definition of a fascist.</p>
-    </aside>
+    <!--FIRST FLEXBOX WITH 4 ARTICLES-->
+    <div id="Container-1">
+     <div class="Div-1"><h1>More Republicans Appear to Be Voting Early, Despite Trump’s Mixed Messages</h1>
+                       <p>In 2020, Donald Trump convinced supporters that anything but in-person Election Day voting was untrustworthy.
+                       After his loss, Republicans shifted their stance.</p>
+                       <p>In 2020, Donald Trump convinced supporters that anything but in-person Election Day voting was untrustworthy.
+                       After his loss, Republicans shifted their stance.</p>
+                       <p>In 2020, Donald Trump convinced supporters that anything but in-person Election Day voting was untrustworthy.
+                    After his loss, Republicans shifted their stance.</p>
 
-    <!--SECTION-->
+                    <h2>As Election Nears, Kelly Warns Trump Would Rule Like a Dictator</h2>
+                    <p id="P-1">John Kelly, the Trump White House’s longest-serving chief of staff, 
+                        said that he believed that Donald Trump met the definition of a fascist.
+                        John Kelly, the Trump White House’s longest-serving chief of staff, 
+                        said that he believed that Donald Trump met the definition of a fascist.</p><hr id="hr-2">
+                        <div class="Div-1-h2-p"><h2>Hezbollah Targets Tel Aviv Area With More Strikes</h2>
+                        <p>Secretary of State Antony Blinken was among the guests at a hotel
+                        who were directed to shelter rooms as sirens went off after a Hezbollah missile launch.</p></div>
+     </div>
 
-    <section>
-       <h2>Bill Gates Privately Says He Has Backed Harris With $50 Million Donation
-       </h2>
-       <p>Mr. Gates said in a statement to The Times that 
-        “this election is different,” reflecting a significant change in his political strategy.
-       </p>
-       <img src="Section/billgates.jpg" height="360" width="500" alt="Bill Gates">
+     <div class="IMG-1"><img src="Div-1/Trump.webp" width="340" height="340" alt="Trump"><hr></div>
 
-    </section>
+      <div class="Div-2"> <h1>Bill Gates Privately Says He Has Backed Harris With $50 Million Donation</h1>
+                          <p>Mr. Gates said in a statement to The Times that 
+                          “this election is different,” reflecting a significant change in his political strategy.
+                          Mr. Gates said in a statement to The Times that 
+                          “this election is different,” reflecting a significant change in his political strategy.</p>
+                          <img src="Aside/billgates.jpg" width="520" height="360" alt="Bill Gates">
+                          <hr>
+       </div>
+    </div><hr>
+    <!--END FIRST FLEXBOX WITH 4 ARTICLES-->
 
-    <!--ARTICLE-->
-    <article>
-        <h2>Hezbollah Targets Tel Aviv Area With More Strikes</h2>
 
-        <p>Secretary of State Antony Blinken was among the guests at a hotel
-            who were directed to shelter rooms as sirens went off after a Hezbollah missile launch.
+    <!--SECOND FLEXBOX WITH 2 ARTICLES-->
+    <div id="Container-2">
+                         <h2>Tech&AI</h2>
+        <div class="Div-3"><h1>The A.I. Power Grab</h1>
+             <p>Big tech companies say A.I. can help solve climate change, 
+            even as it’s driving up their emissions and raising doubts about their climate goals.</p>
+            <img src="Section2/Tech.webp" width="560" height="360" alt="TECH POWER GRAB"><hr id="hr-3"> 
+        </div>
 
-        </p>
-        <img src="Article/articleimage.webp" height="360" width="500" alt="Hezbollah Missile">
-    </article>
+        <div class="Div-4"><h1>Microsoft and OpenAI’s Close Partnership Shows Signs of Fraying</h1>
+            <p>The “best bromance in tech” has had a reality check as OpenAI has tried to change its deal with Microsoft 
+                and the software maker has tried to hedge its bet on the start-up.</p>
+                <img src="Section3/AI.jpeg" width="720" height="360" alt="AI partnership between Microsoft and OpenAI">
+       </div>         
+    </div> <hr>
+    <!--END SECOND FLEXBOX WITH 2 ARTICLES-->
+    <h2>Sports coverage</h2>
+    <div id="Container-3">
+                         <div class="Div-5"><h3>Ranking 134 College Football Teams After a Weekend of Mayhem</h3>
+                            <p>Notre Dame has jumped into the top five, and the changes don’t stop there.</p><hr>
+                            <h3>How Saquon Barkley Flipped the N.F.L.’s Race for the M.V.P. Upside Down</h3>
+                            <p>The star running back signed with the Eagles to rewrite his story. 
+                            He has a lot of writing left to do, a columnist for The Athletic writes.</p><hr>
+                            <h3>Conor McGregor Verdict Should Make Soccer Think Twice About Associating With Him</h3>
+                            <p>The former MMA fighter was play-fighting on a Premier League pitch only last month, our columnist writes.</p>
+                            
+                        </div>
 
-    <hr>
-    <div><h2 id="Tech">Tech</h2></div>
-    <div>
-    <section id="section2">            
-        <h2>The A.I. Power Grab</h2> 
-        <p>
-        Big tech companies say A.I. can help solve climate change, 
-        even as it’s driving up their emissions and raising doubts about their climate goals.
-       </p>
-       <img src="Section2/Tech.webp" height="360" width="500" alt="Tech A.I.">
+                         <img src="sport/sport.webp" width="660" height="460" alt="Sport">
 
-    </section>
+                         <div class="Div-6"><h3>The End of the Cowboys-Commanders Game Left One Broadcaster ‘Speechless’</h3><hr>
+                                            <h3>Why Some N.H.L. Fans Are Happily Paying $30 for Chicken Fingers</h3><hr>
+                                            <h3>A Tennis Star’s Dream Season Carries a Large Asterisk</h3><hr id="hr-6">
 
-    <div>
-        <section id="section3">
-            <h2>
-                Microsoft and OpenAI’s Close Partnership Shows Signs of Fraying</h2>
-                <p>
-                The “best bromance in tech” has had a reality check as OpenAI has tried to change its deal with Microsoft 
-                and the software maker has tried to hedge its bet on the start-up.
-            </p>
-            <img src="Section3/AI.jpeg" width="740" alt="AI">
-        </section>
-    </div>
-</div>
-<hr>
+
+                         </div>
+    </div><hr>
+
+
+
+
+    
+
+
 </main>
 
 
 <!--FOOTER-->
 <footer>
-    <div class="footer-container">
+<div class="footer-container">
     <h1 class="Mainfooter"> <a href="site.html">World Street Journal</a></h1><hr>
     <nav><ul class="footer1"> 
-         <li><a href=""> News </a></li>
-    <li> <a href="#"> Arts </a></li>
-    <li> <a href="#"> Lifestyle</a> </li>
-    <li> <a href="#"> Reviews</a> </li>
-    <li> <a href="#"> More </a></li></ul></nav>
+         <li> <a href="#"> News </a></li>
+         <li> <a href="#"> Arts </a></li>
+         <li> <a href="#"> Lifestyle</a> </li>
+         <li> <a href="#"> Reviews</a> </li>
+         <li> <a href="#"> More </a></li></ul></nav>
 </div>
 </footer><hr>
 
