@@ -65,7 +65,7 @@ hr {
 /*FIRST FLEXBOX WITH 4 ARTICLES*/
 #Container-1{
     display: flex;
-    justify-content: space-between;
+    justify-content:space-between;
     height: 38em;
     margin-top: 10px;
 }
@@ -173,14 +173,22 @@ hr {
     margin-top: -18rem;
 }
 
-
-
-
-
-
-
-
-
+#GamesContainer a {
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-decoration: none;
+    width: 8.5%;
+    display: flex;
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 30px;
+    color: black;
+    background-color: beige;
+}
+#GamesContainer a:hover {
+    background-color:antiquewhite;
+}
 /*FINE MAIN*/
 
 
@@ -237,8 +245,139 @@ footer {
 
 /*FINE FOOTER*/
 
+
+/*--------------------------------------------------------------------------
+/*MEDIA MOBILE*/
 @media (min-width: 1920px) and (max-width: 1920px) {
     .title {
         margin-left: 33.5rem;
+    }
+}
+
+@media (min-width: 320px) and (max-width: 950px) {
+    .Login{
+        text-align: center;
+        margin-right: 1.5rem;
+    }
+    .title {
+        padding-top: 45px;
+        text-align: center;
+        font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        text-decoration: none;
+        color: black;
+        margin-left: 2.5rem;
+        width: 80%;
+    }
+    #Date{
+        margin-top: 30px;
+        text-align: center;
+    }
+    .navbar{
+        margin-left: 140px;
+    }
+
+
+    #Container-1{
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+    }
+    .Div-1 {
+        width: 100%;
+    }
+    .Div-2{
+        width: 100%;
+    }
+    .Div-1 h2{
+        width: 110%;
+    }
+    #P-1{
+        width: 110%;
+    }
+    .Div-1-h2-p{
+        width: 110%;
+    }
+    .Div-2{
+        width: 110%;
+    }
+    .Div-2 img{
+        width: 390px;
+        height: 360px;
+    }
+    #Container-1 hr{
+        width: 0px;
+        height: 0px;
+    }
+    .hr-2{
+        width: 0px;
+    }
+
+    
+
+    #Container-2{
+        align-items: center;
+        flex-direction: column;
+        margin-top: 83rem;
+    }
+    #Container-2 img {
+        margin-left: -25px;
+        width: 360px;
+        height: 360px;
+    }
+    #Container-2 h2 {
+        margin-left: 20px;
+    }
+    #hr-3{
+        width: 22rem;
+        height: 0px;
+        margin-left: -15px;
+        margin-top: 20px;
+    }
+    .Div-3{
+        width: 90%;
+        margin-left: 20px;
+    }
+    .Div-4{
+        margin-left: 25px;
+        width: 80%;
+        margin-top: 10px;
+    }
+
+    
+    #SportsCoverage{
+        margin-top: 50rem;
+        margin-left: 5rem;
+    }
+
+    #Container-3{
+        flex-direction: column;
+        margin-top: 10rem;
+    }
+    #Container-3 img{
+        width: 360px;
+    }
+    #hr-6{
+        height: 0px;
+        width: 0px;
+        margin-left: 100px;
+    }
+
+
+    #GamesContainer{
+        margin-top: 30rem;
+        width: 200%;
+        margin-left: 100px;
+    }
+
+
+    .footer-container{
+        margin-top: 5rem;
+    }
+    .Mainfooter a{
+        margin-top: -90px;
+    }
+    .footer1{
+        width: 10%;
+        margin-left: 50px;
     }
 }
