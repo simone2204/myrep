@@ -16,13 +16,21 @@ function updateDate() {
   }
   
   updateDate(); // Call the function to display the date when the page loads
-
-// -----------------------------------------------------------
-
-let string = 'President-elect Trump promised a 25 percent tariff on Canada and Mexico, and an additional 10 percent on China, blaming the flow of drugs and migrants.'
-document.getElementById("ID-1").textContent = string;
-
 //----------------------------------------------------------------------
 
 // 1) UTILIZZARE ADDEVENTLISTENER()
 
+const button = document.getElementById("readMore");
+button.addEventListener("click", event =>{
+  if(paragraphs.style.visibility === "visible"){
+    document.getElementById("paragraphs").style.visibility = "hidden";
+    button.textContent = "read more";
+    }
+    else {
+      document.getElementById("paragraphs").style.visibility = "visible";
+      button.textContent = "reduce";
+    }
+});
+
+
+//------------------------------------------------------------
