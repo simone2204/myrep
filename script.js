@@ -19,3 +19,10 @@ function updateDate() {
 
 // -----------------------------------------------------------
 
+let string = 'President-elect Trump promised a 25 percent tariff on Canada and Mexico, and an additional 10 percent on China, blaming the flow of drugs and migrants.'
+document.getElementById("ID-1").textContent = string;
+
+//----------------------------------------------------------------------
+
+// 1) UTILIZZARE ADDEVENTLISTENER()
+
