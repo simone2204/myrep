@@ -110,3 +110,21 @@ images_1.forEach(image => {
 });
 
 //------------------------------------------------------------------------
+// MODAL-VIEW
+const image_2 = document.querySelector("#Container-3 img");
+image_2.addEventListener("click", event => {
+  const modal = document.createElement("div");
+  modal.classList.add("modal-view");
+
+  const modalImage = document.createElement("img");
+  modalImage.src = image_2.src;
+  modalImage.alt = image_2.alt;
+  
+  modal.appendChild(modalImage);
+  document.body.appendChild(modal);
+  modal.addEventListener("click", event => {
+    document.body.removeChild(modal);
+  });
+});
+
+//----------------------------------------------------------------------------
