@@ -208,6 +208,21 @@ hr {
     margin-left: 1rem;
     margin-top: -18rem;
 }
+#Container-3 img {
+    cursor: pointer;
+}
+.modal-view {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 59vh;
+    width: 79vw;
+    margin-top: 86rem;
+    margin-left: 10.6rem;
+    background-color: hsla(200, 4%, 14%, 0.8);
+    display: flex;
+    justify-content: center;
+}
 
 #GamesContainer{
     display: flex;
