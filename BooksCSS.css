@@ -1,0 +1,56 @@
+body{
+    margin: 0 5%;
+    background-color: rgb(217, 217, 184, 0.7);
+    padding: 1%;
+}
+#title {
+    display: block;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 2.5rem;
+    text-decoration: none;
+    color: black;
+    margin-left: 36rem;
+    width: 40%;
+}
+h2{
+    font-size: 1.5em;
+    text-align: center;
+}
+h3 {
+    text-align: center;
+}
+#language{
+    display: block;
+    float: right;
+    margin-right: 28rem;
+    margin-top: -1.3rem;
+}
+Input{
+    display: block;
+    margin: 0 auto;
+    width: 25%;
+}
+button{
+    font-size: 15px;
+    display:block;
+    margin: 0 auto;
+    margin-top: 5px;
+}
+
+#Container-1{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.book{
+    padding: 10px;
+    text-align: center;
+    max-width: 200px;
+}
+
+.book-cover {
+    width: 100%;
+    height: auto;
+}
