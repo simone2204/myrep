@@ -6,7 +6,6 @@ async function fetchBooks(){
         let url = `https://openlibrary.org/search.json?q=${encodeURIComponent(BookName)}`;
 
         if (author) url += `+author:${encodeURIComponent(author)}`;
-        
         if (language) url += `&language=${language}`;
 
         const response = await fetch(url);
@@ -32,15 +31,34 @@ async function fetchBooks(){
             }
             coverImg.className = "book-cover";
 
+            coverImg.dataset.url = `https://openlibrary.org${book.key}`;
+            coverImg.addEventListener("click", event => {
+                  if (event.target.dataset.url) {
+                        window.open(event.target.dataset.url, "_blank");
+                  } else console.error("No url found for this cover");
+            });
+
             const title = document.createElement("h4");
             title.textContent = book.title || "title not available";
 
             const author = document.createElement("p");
             author.textContent = `Author: ${book.author_name?.join(", ") || "unknown"}`;
 
+            const access = document.createElement("h4");
+            access.textContent = `condition: ${book.ebook_access}`;
+
+            const language = document.createElement("h4");
+            language.textContent = `lang: ${book.language?.join(", ")}`;
+
+            const publishYear = document.createElement("p");
+            publishYear.textContent = `publish year: ${book.first_publish_year}`;
+
             bookDiv.appendChild(coverImg);
             bookDiv.appendChild(title);
             bookDiv.appendChild(author);
+            bookDiv.appendChild(access);
+            bookDiv.appendChild(publishYear);
+            bookDiv.appendChild(language);
 
             container.appendChild(bookDiv);
         });
@@ -51,5 +69,4 @@ async function fetchBooks(){
         console.error(error);
     }
 }
-
-
+//---------------------------------------------------------
