@@ -1,3 +1,5 @@
+// FIRST WORKING API WITH OPEN'S LIBRARY WITHOUT ANY API KEY
+//----------------------------------------------------------
 async function fetchBooks(){
     try {
         const BookName = document.getElementById("BookName").value.toLowerCase();
