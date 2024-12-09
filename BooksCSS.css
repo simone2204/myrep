@@ -57,3 +57,12 @@ button{
     height: auto;
     cursor: pointer;
 }
+
+#googleBooks{
+    text-decoration: none;
+    text-decoration: underline;
+    color: rgb(67, 67, 227);
+}
+#googleBooks:hover{
+    color: rgb(119, 119, 214);
+}
