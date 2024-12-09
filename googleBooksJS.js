@@ -3,7 +3,7 @@
 async function fetchBooks() {
     const bookName = document.getElementById('BookName').value;
     const author = document.getElementById('author').value;
-    const apiKey = 'AIzaSyA_5zejU9GwkG-6GoNfAOjVttM8nwwJ5n8';
+    const apiKey = '';
     let baseUrl = `https://www.googleapis.com/books/v1/volumes?q=`;
     let query = '';
 
