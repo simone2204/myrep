@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="googleBooksCSS.css">
+    <title>Document</title>
+</head>
+<body>
+    <a id="title" href="http://127.0.0.1:5500/site.html">World Street Journal</a><h2>Book Section in Association with Google Books</h2><hr>
+    <h3>Enter the name of the book you want to search or the author</h3>
+    
+
+    <input type="text" id="BookName" placeholder="enter the name of the book...">
+    <input type="text" id="author" placeholder="or the name of the author...">
+    <select id="language">
+        <option value="">All languages</option>
+        <option value="eng">English</option>
+        <option value="ita">Italian</option>
+        <option value="fre">French</option>
+        <option value="spa">Spanish</option>
+        <option value="ger">German</option>
+    </select>
+    <h3>First ask for</h3>
+    <button onclick="authenticate()">Access</button>
+    <h3>then</h3>
+    <button onclick="fetchBooks()">Research</button>
+
+    <div id="Container-1">
+        <img src="" alt="" id="bookCover">
+
+
+    </div>
+
+    <script src="googleBooksJS.js"></script>
+</body>
+</html>
