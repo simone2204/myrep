@@ -12,6 +12,7 @@ header {
     background-color: white;
     padding: 4px;
     border-radius: 10px;
+    z-index: 5;
 }
 #hr-first{
     margin-top: 58px;
@@ -223,6 +224,26 @@ hr {
     background-color: hsla(200, 4%, 14%, 0.8);
     display: flex;
     justify-content: center;
+    cursor: pointer;
+}
+
+/*NewContainer and new-h1 CREATED THROUGH JAVASCRIPT*/
+.NewContainer {
+display: flex;
+height: 20rem;
+border-radius: 10px;
+margin-top: 1rem;
+justify-content: center;
+background-image: url(journal/journal.jpg);
+}
+
+.new-h1{
+    width: 55%;
+    text-align: center;
+    background-color: white;
+    margin-top: 140px;
+    height: 40px;
+    border-radius: 10px;
     cursor: pointer;
 }
 
