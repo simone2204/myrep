@@ -34,27 +34,17 @@ button.addEventListener("click", event =>{
 
 //------------------------------------------------------------------------------
 // 2) USARE CREATEELEMENT()
+// SOSTITUIRE CON CLASSLIST SUL CSS
 const newContainer = document.createElement("div");
+newContainer.classList.add("NewContainer");
 newContainer.id = "newContainer";
-newContainer.style.display = "flex";
-newContainer.style.height = "20rem";
-newContainer.style.borderRadius = "10px";
-newContainer.style.marginTop = "1rem";
-newContainer.style.justifyContent = "center";
-newContainer.style.backgroundImage = "url('journal/journal.jpg')";
 const box3 = document.getElementById("GamesContainer");
 box3.parentNode.insertBefore(newContainer, box3);
 
 const newElement = document.createElement("h1");
-newElement.id = "newH1";
+newElement.id = "newH1"
+newElement.classList.add("new-h1");
 newElement.textContent = "Click me to change the font-style";
-newElement.style.width = "55%";
-newElement.style.textAlign = "center";
-newElement.style.backgroundColor = "white";
-newElement.style.marginTop = "140px";
-newElement.style.height = "40px";
-newElement.style.borderRadius = "10px";
-newElement.style.cursor = "pointer";
 document.getElementById("newContainer").append(newElement);
 
 
