@@ -34,7 +34,6 @@ button.addEventListener("click", event =>{
 
 //------------------------------------------------------------------------------
 // 2) USARE CREATEELEMENT()
-// SOSTITUIRE CON CLASSLIST SUL CSS
 const newContainer = document.createElement("div");
 newContainer.classList.add("NewContainer");
 newContainer.id = "newContainer";
@@ -118,3 +117,48 @@ image_2.addEventListener("click", event => {
 });
 
 //----------------------------------------------------------------------------
+// NYT API TO RETRIEVE NEWS AND ARTICLES WITH PHP
+document.addEventListener("DOMContentLoaded", () => {
+  firstArticle();
+});
+
+function firstArticle() {
+  const h1 = document.getElementById("header-1");
+  const p = document.getElementById("paragrafo");
+  const sp = document.getElementById("sottoParagrafo");
+  const sp_1 = document.getElementById("sottoParagrafo_1");
+
+  if (!h1) {
+    console.error("Header-1 not found");
+    return;
+  }
+
+  h1.classList.remove('hidden');
+  p.classList.remove('hidden');
+  h1.textContent = "Loading....";
+  p.textContent = "Loading...";
+
+  fetch('http://127.0.0.1/Projects/News.php')
+  .then(response => response.json())
+  .then(data => {
+    console.log(data);
+    if(data.title && data.abstract && data.lead_paragraph) {
+      h1.textContent = data.title;
+      p.textContent = data.abstract;
+      sp.textContent = data.lead_paragraph;
+    }
+      else {
+        h1.textContent = "errore nel caricamento...";
+        p.textContent = "errore nel caricamento...";
+      }
+      h1.classList.add('visible');
+      p.classList.add('visible');
+  })
+  .catch(error => {
+    console.error("Error fetching data:", error);
+    h1.textContent = "Errore nella richiesta";
+    p.textContent = "Errore nella richiesta";
+    h1.classList.add('visible');
+    p.classList.add('visible');
+  });
+}
