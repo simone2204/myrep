@@ -19,43 +19,12 @@ h2{
 h3 {
     text-align: center;
 }
-#language{
-    display: block;
-    float: right;
-    margin-right: 28rem;
-    margin-top: -1.3rem;
-}
-Input{
-    display: block;
-    margin: 0 auto;
-    width: 25%;
-    padding: 3px;
-    margin-top: 10px;
-}
-button{
-    font-size: 15px;
-    display:block;
-    margin: 0 auto;
-    margin-top: 10px;
-}
 
 #Container-1{
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
     margin-top: 20px;
-}
-
-.book{
-    padding: 10px;
-    text-align: center;
-    max-width: 200px;
-}
-
-.book-cover {
-    width: 100%;
-    height: auto;
-    cursor: pointer;
 }
 
 #googleBooks{
