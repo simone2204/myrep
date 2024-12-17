@@ -126,17 +126,16 @@ function firstArticle() {
   const h1 = document.getElementById("header-1");
   const p = document.getElementById("paragrafo");
   const sp = document.getElementById("sottoParagrafo");
-  const sp_1 = document.getElementById("sottoParagrafo_1");
+  const image = document.getElementById("IMG-1");
 
   if (!h1) {
     console.error("Header-1 not found");
     return;
   }
 
-  h1.classList.remove('hidden');
-  p.classList.remove('hidden');
   h1.textContent = "Loading....";
   p.textContent = "Loading...";
+  sp.textContent = "loading...";
 
   fetch('http://127.0.0.1/Projects/News.php')
   .then(response => response.json())
@@ -146,10 +145,22 @@ function firstArticle() {
       h1.textContent = data.title;
       p.textContent = data.abstract;
       sp.textContent = data.lead_paragraph;
+
+      if (data.img) {
+      const img = document.createElement("img");
+      img.src = data.img;
+      img.alt = "article image";
+      img.classList.add("img-api");
+      image.innerHTML = "";
+      image.appendChild(img);
+     } 
+     else image.textContent = "No image available";
+
     }
       else {
         h1.textContent = "errore nel caricamento...";
         p.textContent = "errore nel caricamento...";
+        sp.textContent = "errore nel caricamento...";
       }
       h1.classList.add('visible');
       p.classList.add('visible');
