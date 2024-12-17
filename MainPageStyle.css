@@ -91,7 +91,11 @@ hr {
 #readMore{
     text-decoration:underline;
     cursor: pointer;
-    width: 18%;
+    width: 20%;
+}
+.img-api{
+    width: 95%;
+    height: 60%;
 }
 #readMore:hover{
     color: rgb(118, 117, 117);
@@ -99,8 +103,11 @@ hr {
 #paragraphs{
     visibility: hidden;
 }
+#hr-sottoparagrafo{
+    width: 240%;
+}
 #hr-1{
-    margin-top: 110px;
+    margin-top: 195px;
 }
 .Div-1{
     text-decoration: none;
@@ -110,7 +117,7 @@ hr {
 }
 #hr-4{
     margin-top: 110px;
-    margin-left: -28rem;
+    margin-left: -27rem;
     width: 235%;
 }
 #header-1{
@@ -128,10 +135,13 @@ hr {
 .Div-1 p {
     font-size: 1rem;
 }
-.Div-1 h2, #P-1{
+.Div-1 h2{
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     width: 180%;
-    margin-top: 30px;
+    margin-top: 1rem;
+}
+.Div-1 #P-1{
+    width: 230%;
 }
 
 .Div-2{
@@ -146,22 +156,22 @@ hr {
 }
 .Div-2 hr {
     width: 0;
-    height: 705px;
+    height: 790px;
     margin-left: -12px;
-    margin-top: -620px;
+    margin-top: -768px;
 }
 .IMG-1 hr {
     width: 233%;
     margin-left: -438px;
-    margin-top: 45px;
+    margin-top: 450px;
 }
 #hr-2{
-    width: 195%;
+    width: 240%;
 }
 .Div-1-h2-p {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     width: 190%;
-    margin-top: -20px;
+    margin-top: 1.3rem;
 }
 /*END FIRST FLEXBOX WITH 4 ARTICLES*/
 
@@ -169,7 +179,7 @@ hr {
 #Container-2{
     display: flex;
     height: 32em;
-    margin-top: 50px;
+    margin-top: 40px;
 }
 #Container-2 h2{
     font-size: 20px;
@@ -186,7 +196,7 @@ hr {
 #hr-3 {
     width: 0;
     height: 500px;
-    margin-left: 597px;
+    margin-left: 603px;
     margin-top: -500px;
 }
 
@@ -235,8 +245,8 @@ hr {
     top: 0;
     left: 0;
     height: 59vh;
-    width: 79vw;
-    margin-top: 86rem;
+    width: 80vw;
+    margin-top: 95rem;
     margin-left: 10.6rem;
     background-color: hsla(200, 4%, 14%, 0.8);
     display: flex;
