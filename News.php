@@ -26,7 +26,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
                 $lead_paragraph = $article['lead_paragraph'];
 
-                echo json_encode(["title" => $title, "abstract" => $paragraph, "lead_paragraph" => $lead_paragraph]);
+                $img = isset($article['multimedia'][0]['url']) ? $article['multimedia'][0]['url'] : null;
+
+                echo json_encode(["title" => $title, "abstract" => $paragraph, "lead_paragraph" => $lead_paragraph, 
+                                 "img" => $img ? 'https://static01.nyt.com/' . $img : null]);
             } else {
                 echo json_encode(['success' => false, 'error' => 'No articles found']);
             }
