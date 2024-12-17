@@ -244,7 +244,7 @@ hr {
     position: absolute;
     top: 0;
     left: 0;
-    height: 59vh;
+    height: 60vh;
     width: 80vw;
     margin-top: 95rem;
     margin-left: 10.6rem;
@@ -361,34 +361,55 @@ footer {
 
 @media (min-width: 320px) and (max-width: 950px) {
     .Login{
-        text-align: center;
-        margin-right: 1.5rem;
+        margin-left: 5rem;
+        margin-right: 10rem;
     }
-    .title {
-        padding-top: 45px;
+    #title {
+        padding-top:95px;
         text-align: center;
         font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
         text-decoration: none;
         color: black;
-        margin-left: 2.5rem;
+        margin-left: -0.5rem;
         width: 80%;
     }
     #Date{
         margin-top: 30px;
         text-align: center;
+        margin-left: -7rem;
     }
     .navbar{
-        margin-left: 140px;
+        margin-top: 1rem;
+        margin-left: 1rem;
     }
-
+    #hr-first{
+        margin-top: 15rem;
+    }
+    .hr-double{
+        margin-top: 15px;
+    }
 
     #Container-1{
         align-items: center;
         flex-direction: column;
         width: 100%;
     }
+    #readMore{
+        width: 22%;
+    }
+    #hr-1{
+        margin-top: 175px;
+        margin-left: -0.5rem;
+    }
+    .img-api{
+        width: 360px;
+        height: 360px;
+    }
     .Div-1 {
         width: 100%;
+    }
+    .Div-1 #P-1{
+        width: 90%;
     }
     .Div-2{
         width: 100%;
@@ -401,6 +422,7 @@ footer {
     }
     .Div-1-h2-p{
         width: 110%;
+        margin-top: 5px;
     }
     .Div-2{
         width: 110%;
@@ -422,10 +444,10 @@ footer {
     #Container-2{
         align-items: center;
         flex-direction: column;
-        margin-top: 83rem;
+        margin-top: 89rem;
     }
     #Container-2 img {
-        margin-left: -25px;
+        margin-left: -55px;
         width: 360px;
         height: 360px;
     }
@@ -435,7 +457,7 @@ footer {
     #hr-3{
         width: 22rem;
         height: 0px;
-        margin-left: -15px;
+        margin-left: -40px;
         margin-top: 20px;
     }
     .Div-3{
@@ -453,10 +475,14 @@ footer {
         margin-top: 50rem;
         margin-left: 5rem;
     }
+    #button{
+        width: 110%;
+        margin-left: -1px;
+    }
 
     #Container-3{
         flex-direction: column;
-        margin-top: 10rem;
+        margin-top: 12rem;
     }
     #Container-3 img{
         width: 360px;
@@ -467,11 +493,20 @@ footer {
         margin-left: 100px;
     }
 
+    #newContainer{
+        margin-top: 28rem;
+        width: 145%;
+        margin-left: -50px;
+    }
+    #new-h1{
+        width: 10%;
+    }
+
 
     #GamesContainer{
-        margin-top: 30rem;
+        margin-top: 3rem;
         width: 200%;
-        margin-left: 100px;
+        margin-left: -10.5rem;
     }
 
 
