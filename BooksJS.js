@@ -104,7 +104,10 @@ function displayBooks(books) {
     const container = document.getElementById('Container-1');
     container.innerHTML = '';
 
-    if (books.length === 0) { displayError('No book found'); return ; }
+    if (books.length === 0) { 
+        displayError('No book found'); 
+        return ;
+    }
 
     books.forEach(book => {
         const li = document.createElement('li');
