@@ -479,7 +479,9 @@ footer {
         width: 110%;
         margin-left: -1px;
     }
-
+    .modal-view {
+        display: none;
+    }
     #Container-3{
         flex-direction: column;
         margin-top: 12rem;
