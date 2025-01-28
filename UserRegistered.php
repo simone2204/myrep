@@ -1,12 +1,15 @@
 <?php
 session_start();
+header('Content-Type: application/json');
+header('Access-Control-Allow-Origin: *'); 
+header('Access-Control-Allow-Credentials: true');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email_address = $_POST["email_address"];
     $password = $_POST["password"];
 
     if (empty($email_address) || empty($password)) {
-        echo "Please enter both email and password";
+        echo json_encode(["status" => "error", "message" => "Inserisci email e password"]);
         exit;
     }
 
@@ -17,7 +20,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $conn = new mysqli($host, $username, $dbPassword, $dbname);
     if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
+        echo json_encode(["status" => "error", "message" => "Errore di connessione"]);
+        exit;
     }
 
     $email_address = mysqli_real_escape_string($conn, $email_address); // Protezione SQL injection
@@ -25,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $res = mysqli_query($conn, $query);
 
     if (mysqli_num_rows($res) == 0) {
-        echo "Error: email not found in database";
+        echo json_encode(["status" => "error", "message" => "Email non trovata"]);
         mysqli_free_result($res);
         $conn->close();
         exit;
@@ -37,15 +41,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Verifica della password
     if (password_verify($password, $stored_password)) {
-        session_regenerate_id(true);
         $_SESSION['email'] = $email_address;
         $_SESSION['id'] = $user_id;
+        setcookie("user_email", $email_address, time() + (60 * 60 * 24 * 30), "/");  // 30 giorni di durata del cookie
 
         header("Location: http://127.0.0.1:5500/site.html");
         exit;
     } else {
-        echo "Error: incorrect password" . ' ';
-        echo "Stored password hash: " . $stored_password . ' ' . "Entered password: " . $password;
+        echo json_encode(['status' => 'error', 'message' => 'Error: incorrect password']);
     }
     mysqli_free_result($res);
     $conn->close();
