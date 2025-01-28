@@ -120,7 +120,6 @@ image_2.addEventListener("click", event => {
 // NYT API TO RETRIEVE NEWS AND ARTICLES WITH PHP
 document.addEventListener("DOMContentLoaded", () => {
   firstArticle();
-  // setupLikeButtons();
 });
 
 function firstArticle() {
@@ -148,9 +147,9 @@ function firstArticle() {
       sp.textContent = data.lead_paragraph;
 
       const articleId = 1;
-      // Mantieni il cuore e il contatore
+      
       p.innerHTML = `${data.abstract} 
-        <span class="like-icon" data-article="${articleId}">❤️</span>
+        <span class="like-icon" data-article="${articleId}">👍</span>
         <span class="like-count" id="like-article${articleId}">0</span>`;
 
       if (data.img) {
@@ -203,12 +202,12 @@ document.addEventListener("DOMContentLoaded", () => {
   let userInfo = document.getElementById("user-info");
 
   if (userEmail) {
-      // Se l'utente è loggato, sostituisce il pulsante di login con l'email e un pulsante di logout
+      
       loginLink.style.display = "none"; // Nasconde il link di login
       userInfo.innerHTML = `<span>${userEmail}</span>
       <button id="Logout">Logout</button>`;
 
-      // Logout: rimuove il cookie e ricarica la pagina
+      
       document.getElementById("Logout").addEventListener("click", () => {
           document.cookie = "user_email=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
           location.reload();
@@ -220,7 +219,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // LIKES BUTTONS
 document.addEventListener("click", function (event) {
   if (event.target.classList.contains("like-icon")) {
-    // Controllo login lato client
+    
     function getCookie(name) {
       let cookies = document.cookie.split("; ");
       for (let i = 0; i < cookies.length; i++) {
@@ -232,7 +231,7 @@ document.addEventListener("click", function (event) {
       return null;
     }
 
-    let userEmail = getCookie("user_email"); // Controlla se l'utente è loggato
+    let userEmail = getCookie("user_email");
     console.log("userEmail: ", userEmail);
 
     if (!userEmail) {
@@ -253,7 +252,6 @@ document.addEventListener("click", function (event) {
       return;
     }
 
-    // Recupera i like dell'utente dal localStorage
     let likedArticles = JSON.parse(localStorage.getItem("likedArticles")) || {};
     console.log("liked articles: ", likedArticles);
 
@@ -262,16 +260,16 @@ document.addEventListener("click", function (event) {
       return;
     }
 
-    // Se l'utente non ha già messo like, lo aggiunge
+    
     likedArticles[articleId] = likedArticles[articleId] || {};
     likedArticles[articleId][userEmail] = true;
     localStorage.setItem("likedArticles", JSON.stringify(likedArticles));
 
     let currentLikes = parseInt(likeCountElement.textContent);
-    currentLikes++; // Aggiungi un like
+    currentLikes++;
     likeCountElement.textContent = currentLikes;
 
-    // Invio richiesta al server per registrare il like
+    
     fetch("http://127.0.0.1/Projects/like.php", {
       method: "POST",
       body: JSON.stringify({ articleId: articleId }),
@@ -280,10 +278,10 @@ document.addEventListener("click", function (event) {
       },
       credentials: "include"
     })
-    .then(response => response.text())  // Converti la risposta in testo per debug
+    .then(response => response.text())
     .then(data => {
       console.log("Risposta dal server:", data);
-      return JSON.parse(data);  // Ora prova a parsare il JSON
+      return JSON.parse(data);
     })
     .then(json => {
       if (json.success) {
@@ -295,3 +293,31 @@ document.addEventListener("click", function (event) {
     .catch(error => console.error("Errore nella richiesta:", error));
   }
 });
+
+// ---------------------------------------------------------------
+// Controllo sull'accesso alla sezione Book
+document.addEventListener("DOMContentLoaded", () => {
+  const booksLink = document.getElementById("Books");
+
+  // Aggiungi un event listener per controllare l'accesso alla pagina Books.html
+  booksLink.addEventListener("click", (event) => {
+    let userEmail = getCookie("user_email");
+
+    if (!userEmail) {
+      // Se l'utente non è loggato, blocca l'accesso e mostra un avviso
+      alert("Devi prima fare il login per accedere alla sezione Books.");
+      event.preventDefault(); // Impedisce il comportamento di default (navigare a Books.html)
+    }
+  });
+});
+
+function getCookie(name) {
+  let cookies = document.cookie.split("; ");
+  for (let i = 0; i < cookies.length; i++) {
+    let cookie = cookies[i].split("=");
+    if (cookie[0] === name) {
+      return decodeURIComponent(cookie[1]);
+    }
+  }
+  return null;
+}
