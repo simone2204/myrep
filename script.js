@@ -21,7 +21,7 @@ function updateDate() {
 // 1) UTILIZZARE ADDEVENTLISTENER()
 
 const button = document.getElementById("readMore");
-button.addEventListener("click", event =>{
+button.addEventListener("click", (event) =>{
   if(paragraphs.style.visibility === "visible"){
     document.getElementById("paragraphs").style.visibility = "hidden";
     button.textContent = "read more";
@@ -120,6 +120,7 @@ image_2.addEventListener("click", event => {
 // NYT API TO RETRIEVE NEWS AND ARTICLES WITH PHP
 document.addEventListener("DOMContentLoaded", () => {
   firstArticle();
+  // setupLikeButtons();
 });
 
 function firstArticle() {
@@ -128,8 +129,8 @@ function firstArticle() {
   const sp = document.getElementById("sottoParagrafo");
   const image = document.getElementById("IMG-1");
 
-  if (!h1) {
-    console.error("Header-1 not found");
+  if (!h1 || !p || !sp || !image) {
+    console.error("One or more required elements are missing.");
     return;
   }
 
@@ -145,6 +146,12 @@ function firstArticle() {
       h1.textContent = data.title;
       p.textContent = data.abstract;
       sp.textContent = data.lead_paragraph;
+
+      const articleId = 1;
+      // Mantieni il cuore e il contatore
+      p.innerHTML = `${data.abstract} 
+        <span class="like-icon" data-article="${articleId}">❤️</span>
+        <span class="like-count" id="like-article${articleId}">0</span>`;
 
       if (data.img) {
       const img = document.createElement("img");
@@ -169,7 +176,117 @@ function firstArticle() {
     console.error("Error fetching data:", error);
     h1.textContent = "Errore nella richiesta";
     p.textContent = "Errore nella richiesta";
+    sp.textContent = "Errore nella richiesta";
+  })
+  .finally(() => {
     h1.classList.add('visible');
     p.classList.add('visible');
   });
 }
+
+//----------------------------------------------------------------
+// LOGIN - LOGOUT MANAGER
+document.addEventListener("DOMContentLoaded", () => {
+  function getCookie(name) {
+      let cookies = document.cookie.split("; ");
+      for (let i = 0; i < cookies.length; i++) {
+          let cookie = cookies[i].split("=");
+          if (cookie[0] === name) {
+              return decodeURIComponent(cookie[1]);
+          }
+      }
+      return null;
+  }
+
+  let userEmail = getCookie("user_email");
+  let loginLink = document.getElementById("login");
+  let userInfo = document.getElementById("user-info");
+
+  if (userEmail) {
+      // Se l'utente è loggato, sostituisce il pulsante di login con l'email e un pulsante di logout
+      loginLink.style.display = "none"; // Nasconde il link di login
+      userInfo.innerHTML = `<span>${userEmail}</span>
+      <button id="Logout">Logout</button>`;
+
+      // Logout: rimuove il cookie e ricarica la pagina
+      document.getElementById("Logout").addEventListener("click", () => {
+          document.cookie = "user_email=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+          location.reload();
+      });
+  }
+});
+
+//----------------------------------------------------------------------------
+// LIKES BUTTONS
+document.addEventListener("click", function (event) {
+  if (event.target.classList.contains("like-icon")) {
+    // Controllo login lato client
+    function getCookie(name) {
+      let cookies = document.cookie.split("; ");
+      for (let i = 0; i < cookies.length; i++) {
+        let cookie = cookies[i].split("=");
+        if (cookie[0] === name) {
+          return decodeURIComponent(cookie[1]);
+        }
+      }
+      return null;
+    }
+
+    let userEmail = getCookie("user_email"); // Controlla se l'utente è loggato
+    console.log("userEmail: ", userEmail);
+
+    if (!userEmail) {
+      alert("Devi essere loggato per mettere Mi Piace!");
+      return;
+    }
+
+    const articleId = event.target.getAttribute("data-article");
+    console.log("articleId", articleId);
+    if (!articleId) {
+      console.error("articleId non trovato");
+      return;
+    }
+    const likeCountElement = document.getElementById(`like-article${articleId}`);
+
+    if (!likeCountElement) {
+      console.error(`Elemento con ID like-article${articleId} non trovato`);
+      return;
+    }
+
+    // Recupera i like dell'utente dal localStorage
+    let likedArticles = JSON.parse(localStorage.getItem("likedArticles")) || {};
+    console.log("liked articles: ", likedArticles);
+
+    if (likedArticles[articleId] && likedArticles[articleId][userEmail]) {
+      alert("Hai già messo Mi Piace a questo articolo!");
+      return;
+    }
+
+    // Se l'utente non ha già messo like, lo aggiunge
+    likedArticles[articleId] = likedArticles[articleId] || {};
+    likedArticles[articleId][userEmail] = true;
+    localStorage.setItem("likedArticles", JSON.stringify(likedArticles));
+
+    let currentLikes = parseInt(likeCountElement.textContent);
+    currentLikes++; // Aggiungi un like
+    likeCountElement.textContent = currentLikes;
+
+    // Invio richiesta al server per registrare il like
+    fetch("http://127.0.0.1/Projects/like.php", {
+      method: "POST",
+      body: JSON.stringify({ 
+        articleId: articleId 
+      }),
+      headers: { "Content-Type": "application/json" },
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        console.log("Like aggiornato:", data);
+      } else {
+        console.error("Errore aggiornamento like:", data.error);
+      }
+    })
+    .catch(error => console.error("Errore aggiornamento like:", error));
+  }
+});
