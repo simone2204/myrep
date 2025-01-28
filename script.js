@@ -274,19 +274,24 @@ document.addEventListener("click", function (event) {
     // Invio richiesta al server per registrare il like
     fetch("http://127.0.0.1/Projects/like.php", {
       method: "POST",
-      body: JSON.stringify({ 
-        articleId: articleId 
-      }),
-      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ articleId: articleId }),
+      headers: { 
+        "Content-Type": "application/json"
+      },
+      credentials: "include"
     })
-    .then(response => response.json())
+    .then(response => response.text())  // Converti la risposta in testo per debug
     .then(data => {
-      if (data.success) {
-        console.log("Like aggiornato:", data);
+      console.log("Risposta dal server:", data);
+      return JSON.parse(data);  // Ora prova a parsare il JSON
+    })
+    .then(json => {
+      if (json.success) {
+        console.log("Like aggiornato:", json);
       } else {
-        console.error("Errore aggiornamento like:", data.error);
+        console.error("Errore aggiornamento like:", json.error);
       }
     })
-    .catch(error => console.error("Errore aggiornamento like:", error));
+    .catch(error => console.error("Errore nella richiesta:", error));
   }
 });
