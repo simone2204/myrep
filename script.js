@@ -111,10 +111,11 @@ image_2.addEventListener("click", () => {
 
 
 document.addEventListener("DOMContentLoaded", () => {
+  loadHeadArticle();
   loadArticles();
 });
 
-function loadArticles() {
+function loadHeadArticle() {
   const h1 = document.getElementById("header-1");
   const p = document.getElementById("paragrafo");
   const sp = document.getElementById("sottoParagrafo");
@@ -140,12 +141,14 @@ function loadArticles() {
       p.textContent = data.abstract;
       sp.textContent = data.lead_paragraph;
 
-      const articleId = 1;
+      const article_Id = 1;
 
-      p.innerHTML = `${data.abstract} 
-        <span class="like-icon" data-article="${articleId}">👍</span>
-        <span class="like-count" id="like-article${articleId}">0</span>
-        <button class="comment" data-article="${articleId}">Share a comment</button>`;
+      p.innerHTML = `${data.abstract} <br>
+      <button id="comment_1" data-article="${article_Id}">Share a comment</button>
+        <span class="like-icon" data-article="${article_Id}">👍</span>
+        <span class="like-count" id="like-article${article_Id}">0</span>`;
+
+
 
       if (data.img) {
         const img = document.createElement("img");
@@ -169,50 +172,82 @@ function loadArticles() {
     p.textContent = "Request error...";
     sp.textContent = "Request error...";
   });
+}
 
+function loadArticles() {
   fetch('http://127.0.0.1/Projects/News.php')
   .then(response => response.json())
   .then(data => {
     console.log(data);
     if (Array.isArray(data) && data.length > 0) {
-      // Pulisci il contenitore articoli prima di aggiungere nuovi articoli
+      
       document.getElementById("articles-container").innerHTML = "";
 
-      // Itera attraverso gli articoli e crea gli elementi HTML per ciascuno
-      data.forEach((article, index) => {
+      data.forEach((article) => {
         const articleDiv = document.createElement("div");
         articleDiv.classList.add("article");
 
         articleDiv.innerHTML = `
           <h1>${article.title}</h1>
           <p>${article.abstract}</p>
-          <p>${article.lead_paragraph}</p>
-          ${article.img ? `<img src="${article.img}" alt="Article image">` : "<p>No image available</p>"}
-          <span class="like-icon" data-article="${index + 1}">👍</span>
-          <span class="like-count" id="like-article${index + 1}">0</span>
-          <button class="comment" data-article="${index + 1}">Share a comment</button>`;
+          ${article.img ? `<img src="${article.img}" alt="Article image">` : "<p>No image available</p>"}`;
 
-        // Aggiungi l'articolo al contenitore
-        document.getElementById("articles-container").appendChild(articleDiv);
+        saveArticle(article.title)
+        .then(articleId => {
+          console.log("Articolo salvato. ID dell'articolo:", articleId);
+
+          articleDiv.innerHTML += `
+            <br><button class="comment" dataArticle="${articleId}">Share a comment on this article</button>
+            <span class="likeIcon" dataArticle="${articleId}">👍</span>
+            <span class="likeCount" id="likeArticle${articleId}">0</span>
+          `;
+          
+          document.getElementById("articles-container").appendChild(articleDiv);
+          console.log(`Articolo "${article.title}" con ID: ${articleId} è stato aggiunto alla pagina.`);
+        })
+        .catch(error => {
+          console.error("Errore nel salvataggio dell'articolo:", error);
+        });
       });
     }
-      else {
-        h1.textContent = "loading error...";
-        p.textContent = "loading error...";
-        sp.textContent = "loading error...";
-      }
   })
   .catch(error => {
     console.error("Error fetching data:", error);
     h1.textContent = "Request error...";
     p.textContent = "Request error...";
     sp.textContent = "Request error...";
-  })
+  });
+}
+
+function saveArticle(title) {
+  return new Promise((resolve, reject) => {
+    fetch("http://127.0.0.1/Projects/save_article.php", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ 
+        articleTitle: title,
+      }),
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        resolve(data.article_id);
+      } else {
+        reject(data.message);
+      }
+    })
+    .catch(error => {
+      console.error("Errore nella richiesta:", error);
+      reject(error);
+    });
+  });
 }
 
 
 document.addEventListener("click", (event) => {
-  if (event.target.classList.contains("like-icon")) {
+  if (event.target.classList.contains("likeIcon")) {
     console.log("userEmail: ", userEmail);
 
     if (!userEmail) {
@@ -220,68 +255,89 @@ document.addEventListener("click", (event) => {
       return;
     }
 
-    const articleId = event.target.getAttribute("data-article");
+    const articleId = event.target.getAttribute("dataArticle");
     console.log("articleId", articleId);
     if (!articleId) {
       console.error("articleId non trovato");
       return;
     }
 
-    const likeCountElement = document.getElementById(`like-article${articleId}`);
+    const likeCountElement = document.getElementById(`likeArticle${articleId}`);
     if (!likeCountElement) {
-      console.error(`Elemento con ID like-article${articleId} non trovato`);
+      console.error(`Elemento con ID likeArticle${articleId} non trovato`);
       return;
     }
-    
+
     fetch("http://127.0.0.1/Projects/like.php", {
       method: "POST",
       body: JSON.stringify({ articleId: articleId }),
       headers: { "Content-Type": "application/json" },
       credentials: "include"
     })
-    .then(response => response.json())
-    .then(likeCountObject => {
-      if (likeCountObject.success) {
-        
-        likeCountElement.textContent = likeCountObject.likeCount;
-        console.log("Like aggiornato:", likeCountObject);
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`Errore HTTP: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log("Risposta del server:", data);
+      if (data.success) {
+        likeCountElement.textContent = data.likeCount;
+        console.log("Like aggiornato:", data);
       } else {
-        alert(likeCountObject.error);
-        console.error("Errore aggiornamento like:", likeCountObject.error);
+        alert(data.error);
+        console.error("Errore aggiornamento like:", data.error);
       }
     })
     .catch(error => console.error("Errore nella richiesta:", error));
   }
 
-  if (event.target && event.target.classList.contains("comment")) {
+  if (event.target.classList.contains("comment")) {
     if (!userEmail) {
       alert("Devi essere autenticato per commentare");
     } else {
-      const articleId = event.target.getAttribute("data-article");
-      window.location.href = `../commentPage.php?articleId=${articleId}`;
+      const articleId = event.target.getAttribute("dataArticle");
+      if (articleId) {
+        window.location.href = `../commentPage.php?articleId=${articleId}`;
+      } else {
+        console.error("articleId non trovato per il commento");
+      }
     }
   }
 });
 
 
-function getLikeCount(articleId) {
-  fetch('http://127.0.0.1/Projects/get_likes.php', {
-      method: 'POST',
-      headers: {
-          'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ articleId: articleId })
-  })
-  .then(response => response.json())
-  .then(data => {
-      if (data.success) {
-          const likeElement = document.getElementById(`like-article${articleId}`);
-          if (likeElement) {
-              likeElement.innerText = data.likeCount;
-          } else {
-              console.error(`Elemento like-article${articleId} non trovato nel DOM`);
-          }
-      }
-  })
-  .catch(error => console.error('Errore nel recupero dei like:', error));
-}
+document.addEventListener("DOMContentLoaded", () => {  
+  setTimeout(() => {
+    fetch("http://127.0.0.1/Projects/get_likes.php", { credentials: "include" })
+      .then(response => response.json())
+      .then(data => {
+        console.log("Dati ricevuti da get_likes.php:", data);
+
+        if (data.success) {
+
+          data.likedArticles.forEach(articleId => {
+            const likeIcon = document.querySelector(`.likeIcon[dataArticle="${articleId}"]`);
+            if (likeIcon) {
+              likeIcon.style.color = "blue";
+            } else {
+              console.warn(`Icona like non trovata per articolo ${articleId}`);
+            }
+          });
+          
+          data.likedArticles.forEach(articleId => {
+            const likeCountElement = document.getElementById(`likeArticle${articleId}`);
+            if (likeCountElement) {
+              likeCountElement.textContent = data.likeCounts[articleId];
+            } else {
+              console.warn(`Elemento per likeCount non trovato per articolo ${articleId}`);
+            }
+          });
+        } else {
+          console.error("Errore: non è stato possibile recuperare i dati dei like.");
+        }
+      })
+      .catch(error => console.error("Errore nel recupero dei like:", error));
+  }, 3000);
+});
