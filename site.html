@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,26 +13,44 @@
 </head>
 
 <body>
-    <!--HEADER-->
-<header> 
+    
+<header>
     <div id="Div-Header">
         <a class="Login" href="#">Subscribe for 0.50/week</a>
-        <a class="Login" id="login" href="http://127.0.0.1/Projects/Login.php">Login</a>
-        <a id="title" href="site.html">World Street Journal</a>
-        <div id="user-info"></div>
+
+        <?php if (isset($_SESSION['email'])): ?>
+            <div id="user-info">
+                <span><?php echo htmlspecialchars($_SESSION['email']); ?></span>
+            </div>
+
+                <div>
+                <form method="POST" action="../logout.php">
+                    <button type="submit" id="Logout">Logout</button>
+                </form>
+            </div>
+        <?php else: ?>
+            <a class="Login" id="login" href="http://127.0.0.1/Projects/Login.php">Login</a>
+        <?php endif; ?>
+
+        <a id="title" href="site.php">World Street Journal</a>
         <div id="Date"></div>
 
         <script src="script.js" defer></script>
     </div>
 </header>
 <hr id="hr-first">
-<!--NAVIGATION BAR-->
+
+
 <nav>
     <div>
         <a class="navbar" href="#">World</a>
         <a class="navbar" href="#">Opinion</a>
         <a class="navbar" href="#">Business</a>
-        <a class="navbar" id="Books" href="BooksPage/Books.html">Books</a>
+        <?php if (isset($_SESSION['email'])): ?>
+            <a class="navbar" id="Books" href="BooksPage/_Books.php">Books</a>
+        <?php else: ?>
+            <a class="navbar" href="../Login.php" onclick="alert('Devi prima fare il login per accedere alla sezione Books.');">Books</a>
+        <?php endif; ?>
     </div>
 
     <div class="hr-double"><hr>
@@ -36,30 +58,31 @@
     
     </nav>
 
-<!--MAIN-->
+    <script>
+    <?php if (isset($_SESSION['email'])): ?>
+        var userEmail = "<?php echo htmlspecialchars($_SESSION['email']); ?>";
+    <?php else: ?>
+        var userEmail = null;
+    <?php endif; ?>
+</script>
+
+
 <main>
-    <!--FIRST FLEXBOX WITH 4 ARTICLES-->
+    
     <div id="Container-1">
-     <div class="Div-1"><a href="#" id="header-1" class="hidden"><h1></h1></a>
+     <div class="Div-1"><a href="#" id="header-1" class=""><h1></h1></a>
                        <p id="paragrafo">In 2020, Donald Trump convinced supporters that anything but in-person Election Day voting was untrustworthy.
                        After his loss, Republicans shifted their stance.
-                       <div id="readMore">read more</div></p>
+                       <div id="readMore">read more</div></p> 
 
                        <div id="paragraphs">
                        <p id="sottoParagrafo">President-elect Trump promised a 25 percent tariff on Canada and Mexico, and an additional 10 percent on China, 
                         blaming the flow of drugs and migrants.</p>
-                       <p id="sottoParagrafo_1">President-elect Trump’s pick to run the F.B.I. has a record in and out of government 
-                        that is likely to raise questions during his Senate confirmation hearings.</p>
-                    </div><hr id="hr-sottoparagrafo">
+                    </div>
 
-                    <h2>As Election Nears, Kelly Warns Trump Would Rule Like a Dictator</h2>
-                    <p id="P-1">John Kelly, the Trump White House’s longest-serving chief of staff, 
-                        said that he believed that Donald Trump met the definition of a fascist.
-                        John Kelly, the Trump White House’s longest-serving chief of staff, 
-                        said that he believed that Donald Trump met the definition of a fascist.</p><hr id="hr-2">
-                        <div class="Div-1-h2-p"><h2>Hezbollah Targets Tel Aviv Area With More Strikes</h2>
-                        <p>Secretary of State Antony Blinken was among the guests at a hotel
-                        who were directed to shelter rooms as sirens went off after a Hezbollah missile launch.</p></div>
+                    
+
+
      </div>
 
      <div id="IMG-1"><img src="Div-1/Trump.webp" data-category="politics" width="340" height="340" alt="Trump"><hr id="hr-4"></div>
@@ -70,15 +93,16 @@
                           Mr. Gates said in a statement to The Times that 
                           “this election is different,” reflecting a significant change in his political strategy.</p>
                           <img src="Aside/billgates.jpg" data-category="politics" width="520" height="360" alt="Bill Gates">
-                          <h2>Biden Prepares to Target Chinese Legacy Chips With Trade Investigation</h2>
-                          <p>The investigation could result in tariffs on older types of chips from China, though the decision would ultimately fall to Trump.</p>
                           <hr>
        </div>
     </div><hr id="hr-1">
-    <!--END FIRST FLEXBOX WITH 4 ARTICLES-->
+    
+    <div id="mostRecentArticles"><h1>Most recent Articles</h1></div>
+    <div id="articles-container">
+        
+    </div>
 
-
-    <!--SECOND FLEXBOX WITH 2 ARTICLES-->
+    
     <div id="Container-2">
                          <h2>Tech&AI</h2>
         <div class="Div-3"><h1>The A.I. Power Grab</h1>
@@ -93,9 +117,9 @@
                 <img src="Section3/AI.jpeg" data-category="technology" width="720" height="360" alt="AI partnership between Microsoft and OpenAI">
        </div>         
     </div> <hr>
-    <!--END SECOND FLEXBOX WITH 2 ARTICLES-->
+    
 
-    <!--THIRD FLEXBOX WITH 3 ITEMS-->
+    
     <h2 id="SportsCoverage">Sports coverage</h2>
     <div id="Container-3">
                          <div class="Div-5"><h3>Ranking 134 College Football Teams After a Weekend of Mayhem</h3>
@@ -114,21 +138,24 @@
                                             <h3>Why Some N.H.L. Fans Are Happily Paying $30 for Chicken Fingers</h3><hr>
                                             <h3>A Tennis Star’s Dream Season Carries a Large Asterisk</h3><hr id="hr-6">
 
-
                          </div>
     </div><hr id="hr-7">
 
-
+    
     <div id="GamesContainer">
+    <?php if (isset($_SESSION['email'])): ?>
         <a data-category="games" href="Games/RollDiceGame/RollDice.html">Roll Dices Game</a>
+    <?php else: ?>
+        <a data-category="games" href="../Login.php" onclick="alert('Devi prima fare il login');">Roll Dices Game</a>
+        <?php endif; ?>
     </div>
 </main>
 
 
-<!--FOOTER-->
+
 <footer>
 <div class="footer-container">
-    <h1 class="Mainfooter"> <a href="site.html">World Street Journal</a></h1><hr>
+    <h1 class="Mainfooter"> <a href="site.php">World Street Journal</a></h1><hr>
     <nav><ul class="footer1"> 
          <li> <a href="#"> News </a></li>
          <li> <a href="#"> Arts </a></li>
